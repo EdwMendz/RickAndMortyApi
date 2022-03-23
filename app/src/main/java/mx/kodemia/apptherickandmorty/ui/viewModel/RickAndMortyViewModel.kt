@@ -21,8 +21,10 @@ class RickAndMortyViewModel : ViewModel() {
             try {
                 if (respuestaRick.isSuccessful) {
                     personaes.postValue(respuestaRick.body())
-                } else
+                } else {
                     error.postValue(respuestaRick.errorBody().toString())
+                }
+                cargando.postValue(false)
             } catch (io: Exception) {
                 error.postValue(io.localizedMessage)
                 cargando.postValue(false)

@@ -2,6 +2,7 @@ package mx.kodemia.apptherickandmorty.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import mx.kodemia.apptherickandmorty.core.model.RickAndMorty.RickAndMortyResponse
@@ -25,6 +26,20 @@ class RickAndMorthyView : AppCompatActivity() {
         viewmodel.personaes.observe(this){personajes->
             llenarReciclerView(personajes)
         }
+        viewmodel.cargando.observe(this) { cargando ->
+            cargando(cargando)
+        }
+    }
+
+    private fun cargando(cargando: Boolean) {
+        binding.apply {
+            if (cargando){
+                progressBar.visibility = View.VISIBLE
+            }else{
+                progressBar.visibility = View.GONE
+            }
+        }
+
     }
 
     private fun llenarReciclerView(personajes: RickAndMortyResponse) {
